@@ -2614,14 +2614,14 @@ pHandle = pComponentPrivate_CC->pHandle;
     
     else if(event == EMMCodecProcessingStoped) 
     {
-        LOGI("AAC encoder received stop ack, waiting for all outstanding buffers to be returned");
+        ALOGI("AAC encoder received stop ack, waiting for all outstanding buffers to be returned");
         pthread_mutex_lock(&bufferReturned_mutex);
         while (pComponentPrivate_CC->EmptythisbufferCount != pComponentPrivate_CC->EmptybufferdoneCount ||
                pComponentPrivate_CC->FillthisbufferCount  != pComponentPrivate_CC->FillbufferdoneCount) {
             pthread_cond_wait(&bufferReturned_condition, &bufferReturned_mutex);
         }
         pthread_mutex_unlock(&bufferReturned_mutex);
-        LOGI("AAC encoder has returned all buffers");
+        ALOGI("AAC encoder has returned all buffers");
 
         pthread_mutex_lock(&pComponentPrivate_CC->codecStop_mutex);
         if(pComponentPrivate_CC->codecStop_waitingsignal == 0){
@@ -3460,7 +3460,7 @@ OMX_ERRORTYPE AddStateTransition(AACENC_COMPONENT_PRIVATE* pComponentPrivate) {
     }
     /* Increment state change request reference count */
     pComponentPrivate->nPendingStateChangeRequests++;
-    LOGI("addstatetranstion: %ld @ %d", pComponentPrivate->nPendingStateChangeRequests, pComponentPrivate->curState);
+    ALOGI("addstatetranstion: %ld @ %d", pComponentPrivate->nPendingStateChangeRequests, pComponentPrivate->curState);
 
     if(pthread_mutex_unlock(&pComponentPrivate->mutexStateChangeRequest)) {
        return OMX_ErrorUndefined;
@@ -3476,7 +3476,7 @@ OMX_ERRORTYPE RemoveStateTransition(AACENC_COMPONENT_PRIVATE* pComponentPrivate,
        return OMX_ErrorUndefined;
     }
     pComponentPrivate->nPendingStateChangeRequests--;
-    LOGI("removestatetranstion: %ld @ %d", pComponentPrivate->nPendingStateChangeRequests, pComponentPrivate->curState);
+    ALOGI("removestatetranstion: %ld @ %d", pComponentPrivate->nPendingStateChangeRequests, pComponentPrivate->curState);
 
     /* If there are no more pending requests, signal the thread waiting on this*/
     if(!pComponentPrivate->nPendingStateChangeRequests && bEnableSignal) {
@@ -3508,7 +3508,7 @@ void SignalIfAllBuffersAreReturned(AACENC_COMPONENT_PRIVATE *pComponentPrivate)
         if ((pComponentPrivate->EmptythisbufferCount == pComponentPrivate->EmptybufferdoneCount) &&
             (pComponentPrivate->FillthisbufferCount ==   pComponentPrivate->FillbufferdoneCount)) {
             pthread_cond_broadcast(&bufferReturned_condition);
-            LOGI("Sending pthread signal that OMX has returned all buffers to app");
+            ALOGI("Sending pthread signal that OMX has returned all buffers to app");
         }
         pthread_mutex_unlock(&bufferReturned_mutex);
 }
