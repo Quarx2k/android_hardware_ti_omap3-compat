@@ -18,8 +18,8 @@
 
 #include <dlfcn.h>
 
-#include <HardwareAPI.h>
-#include <MediaDebug.h>
+#include <media/hardware/HardwareAPI.h>
+#include <media/stagefright/foundation/ADebug.h>
 
 namespace android {
 
