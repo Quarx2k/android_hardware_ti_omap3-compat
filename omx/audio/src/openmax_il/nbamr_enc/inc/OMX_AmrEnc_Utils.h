@@ -120,7 +120,7 @@
 /* ======================================================================= */
 #ifndef UNDER_CE
     #ifdef ANDROID
-        #define AMRENC_EPRINT LOGE
+        #define AMRENC_EPRINT ALOGE
     #else   
         #define AMRENC_EPRINT(...)    fprintf(stderr,__VA_ARGS__)
     #endif
@@ -142,7 +142,7 @@
 
     #ifdef ANDROID
         #undef AMRENC_DPRINT
-        #define AMRENC_DPRINT LOGW
+        #define AMRENC_DPRINT ALOGW
     #endif
 
 #else
@@ -160,7 +160,7 @@
 
     #ifdef ANDROID
         #undef AMRENC_MEMPRINT
-        #define AMRENC_MEMPRINT LOGW
+        #define AMRENC_MEMPRINT ALOGW
     #endif
 
 #else
@@ -193,8 +193,8 @@
 
 #ifdef DEBUG
     #ifdef ANDROID
-        #define AMRENC_DPRINT     LOGW
-        #define AMRENC_MEMPRINT   LOGW
+        #define AMRENC_DPRINT     ALOGW
+        #define AMRENC_MEMPRINT   ALOGW
     #else
         #define AMRENC_DPRINT     printf
         #define AMRENC_MEMPRINT   printf
