@@ -160,6 +160,7 @@ include $(TI_OMX_VIDEO)/video_decode/test/Android.mk
 include $(TI_OMX_VIDEO)/video_encode/Android.mk
 include $(TI_OMX_VIDEO)/video_encode/test/Android.mk
 include $(TI_OMX_VIDEO)/prepost_processor/Android.mk
+include $(TI_OMX_VIDEO)/video_encode_ittiam/Android.mk
 
 #call to image
 include $(TI_OMX_IMAGE)/jpeg_enc/Android.mk
