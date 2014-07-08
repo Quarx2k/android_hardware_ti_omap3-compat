@@ -34,3 +34,10 @@ LOCAL_LDFLAGS := -Wl,--no-warn-shared-textrel
 LOCAL_MODULE:= libOMX.TI.720P.Encoder
 LOCAL_MODULE_TAGS:= optional
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_PREBUILT_LIBS := bin/libOMX.TI.mp4.splt.Encoder.so \
+			bin/libOMX.TI.h264.splt.Encoder.so
+LOCAL_MODULE_TAGS:= optional
+include $(BUILD_MULTI_PREBUILT)
